@@ -1,0 +1,39 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Data
+data/
+!data/.gitkeep
+# If you want to keep the data structure but ignore files, usually we ignore contents but keep gitkeep.
+# For now, following instructions to ignore huge data files.
+# Explicitly ignoring raw and processed data contents usually, but user said "huge data files".
+# Let's ignore common data extensions and the folders content
+data/raw/*
+data/processed/*
+*.csv
+*.xlsx
+*.parquet
+*.pkl
+*.h5
+
+# Models
+models/*
+!models/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
