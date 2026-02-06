@@ -1,6 +1,5 @@
 # Heart Disease Prediction System 🫀
 
-![App Screenshot Placeholder](https://via.placeholder.com/800x400?text=Streamlit+App+Screenshot+Here)
 
 ## 📌 Overview
 
@@ -110,4 +109,4 @@ The model has been evaluated on a held-out test set and achieves valid performan
 *   **Model Monitoring**: Implement tools like MLflow or evidently.ai for drift detection.
 
 ---
-*Built with ❤️ by a Senior DevOps Engineer.*
+
