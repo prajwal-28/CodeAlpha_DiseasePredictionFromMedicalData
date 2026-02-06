@@ -27,18 +27,18 @@ class PredictPipeline:
 class CustomData:
     def __init__(self,
                  age: int,
-                 sex: int,
-                 cp: int,
-                 trestbps: int,
-                 chol: int,
-                 fbs: int,
-                 restecg: int,
-                 thalch: int,
-                 exang: int,
+                 sex: str,
+                 cp: str,
+                 trestbps: float,
+                 chol: float,
+                 fbs: str,
+                 restecg: str,
+                 thalch: float,
+                 exang: str,
                  oldpeak: float,
-                 slope: int,
-                 ca: int,
-                 thal: int):
+                 slope: str,
+                 ca: float,
+                 thal: str):
         
         self.age = age
         self.sex = sex

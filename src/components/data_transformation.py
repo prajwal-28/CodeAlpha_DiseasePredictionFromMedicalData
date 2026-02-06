@@ -23,8 +23,8 @@ class DataTransformation:
 
     def get_data_transformer_object(self):
         try:
-            numerical_columns = ['age', 'trestbps', 'chol', 'thalch', 'oldpeak']
-            categorical_columns = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
+            numerical_columns = ['age', 'trestbps', 'chol', 'thalch', 'oldpeak', 'ca']
+            categorical_columns = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal']
 
             num_pipeline = Pipeline(
                 steps=[
@@ -36,7 +36,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                     ("imputer", SimpleImputer(strategy="most_frequent")),
-                    ("one_hot_encoder", OneHotEncoder()),
+                    ("one_hot_encoder", OneHotEncoder(handle_unknown='ignore', sparse_output=False)),
                     ("scaler", StandardScaler(with_mean=False))
                 ]
             )
@@ -61,11 +61,14 @@ class DataTransformation:
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
 
-            # Drop metadata columns that are not useful for prediction
-            cols_to_drop = ['id', 'dataset']
-            # Check if they exist before dropping to prevent errors
-            train_df.drop(columns=[c for c in cols_to_drop if c in train_df.columns], inplace=True)
-            test_df.drop(columns=[c for c in cols_to_drop if c in test_df.columns], inplace=True)
+            # 1. Drop useless metadata
+            train_df.drop(columns=['id', 'dataset'], axis=1, inplace=True, errors='ignore')
+            test_df.drop(columns=['id', 'dataset'], axis=1, inplace=True, errors='ignore')
+
+            # 2. Fix Binary Target (0 = Healthy, 1-4 = Disease)
+            # The column name is 'num' in this dataset
+            train_df['num'] = train_df['num'].apply(lambda x: 1 if x > 0 else 0)
+            test_df['num'] = test_df['num'].apply(lambda x: 1 if x > 0 else 0)
 
             logging.info("Read train and test data completed")
 
